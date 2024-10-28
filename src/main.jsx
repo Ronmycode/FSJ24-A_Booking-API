@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+import './index.css';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
+// Import global libraries (Bootstrap and Toastr)
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.min.css';
+
+const rootElement = document.getElementById('root');
+
+createRoot(rootElement).render(
+  <React.StrictMode>
     <App />
-  </StrictMode>,
-)
+  </React.StrictMode>
+);

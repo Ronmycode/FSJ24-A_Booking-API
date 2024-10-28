@@ -40,3 +40,19 @@
 .read-the-docs {
   color: #888;
 }
+
+/* src/App.css */
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #ffffff;
+}
+
+.main-content {
+  margin-left: 200px; /* Igual al ancho del sidebar */
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #f7f7f7; /* Fondo gris claro */
+}

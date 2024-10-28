@@ -7,7 +7,7 @@ const login = async (user) => {
         /**
          * Peticiones HTTP: GET, POST, PUT, DELETE, PATCH
          */
-        const response = await axios.post("https://apibookingsaccomodations-production.up.railway.app/api/V1/login", user);
+        const response = await axios.post("https://apibookingsAccomodations-production.up.railway.app/api/V1/login", user);
         return response.data;
     }catch(error){
         console.error("Error al autenticarse", error);
