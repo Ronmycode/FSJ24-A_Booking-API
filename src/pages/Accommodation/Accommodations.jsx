@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getAccommodations } from '../../services/accommodationServices'
+import { PlusLg } from 'react-bootstrap-icons'
 
+import CustomCard from './Card'
+
+// import '.accommodations.css'
 export default function Accommodations() {
     const [Accommodations, setAccommodations] = useState([])
     //estado para verificar si el usuario esta autenticado
@@ -26,14 +30,22 @@ export default function Accommodations() {
     }, [])
 
     return (
-        <div>
+       <>
+        <div className="w-100 d-flex justify-content-between">
+            <h2>Accommodations</h2>
+            <button className='d-flex align-items-center gap-2 px-3 rounded-4'>
+            <PlusLg size={16} />
+             Nuevo Alojamiento 
+            </button>
+         </div>
+        
             {/** validamos si la persona esta autenticada */}
+            <div className='pt-4'>
             {
                 isAuthenticated ? (
                     <>
-                        <h1>Accommodations List</h1>
                         <div>
-                            {
+                            {/* {
                                 //mapeando los alojamientos
                                 Accommodations.map((item) => {
                                     return (
@@ -44,11 +56,15 @@ export default function Accommodations() {
                                         </div>
                                     )
                                 })
-                            }
+                            } */}
+                            <CustomCard />
                         </div>
                     </>
                 ) : <h2>No estas autorizado, inicia sesion</h2>
             }
-        </div>
+
+            </div>
+       </>
+
     )
 }
