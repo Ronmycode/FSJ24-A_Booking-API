@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import { login } from '../../services/loginServices';
 import { useNavigate } from 'react-router-dom';
 import toastr from 'toastr';
-export default function Login() {
+
+export default function Login({ setIsAuthenticated}) {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
 
@@ -14,6 +15,7 @@ export default function Login() {
             if (response && response.token) {
                 sessionStorage.setItem('token_bookings', response.token);
                 toastr.success('¡Bienvenido! Inicio de sesión exitoso.');
+                setIsAuthenticated(true) //actualizar la autenticación del usuario
                 navigate('/accommodations');
             } else if (response?.message) {
                 toastr['warning'](response.message); // Mensaje específico de error de respuesta

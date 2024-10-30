@@ -1,4 +1,7 @@
 import axios from "axios";
+import toastr from "toastr";
+import { useNavigate } from 'react-router-dom';
+
 
 //metodo para iniciar sesion
 const login = async (user) => {
@@ -14,8 +17,6 @@ const login = async (user) => {
     }
 }
 
-const logout = () => {
-    console.log("Has cerrado sesion");
-}
 
-export { login, logout }
+
+export { login }

@@ -8,8 +8,9 @@ export default function Accommodations() {
 
     //metodo para obtener la respuesta de la api
     const fetchData = async () => {
+
         const response = await getAccommodations() //si esto es un exito devolvera un arreglo de alojamientos
-        setAccommodations(response);
+        setAccommodations(response || []);
     }
 
     useEffect(() => {

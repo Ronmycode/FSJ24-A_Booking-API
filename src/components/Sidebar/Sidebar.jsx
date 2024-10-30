@@ -5,7 +5,14 @@ import { Link } from "react-router-dom";
 import { PersonFill, HouseDoorFill, BoxArrowRight, GridFill } from "react-bootstrap-icons";
 import "./Sidebar.css";
 
-const Sidebar = () => {
+
+const Sidebar = ({ setIsAuthenticated}) => {
+
+  //logout
+  const handleLogout = () =>{
+    sessionStorage.removeItem('token_bookings');
+    setIsAuthenticated(false);
+  }
   return (
     <aside>
       <div className="sidebar-header">
@@ -26,9 +33,9 @@ const Sidebar = () => {
 
       <hr className="divider" />
       
-      <Link to="/logout" className="logout">
+      <div className="logout" onClick={()=>handleLogout()}>
         <BoxArrowRight /> Logout
-      </Link>
+      </div>
     </aside>
   );
   toastr.options = {
