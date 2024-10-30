@@ -1,105 +1,164 @@
 /* src/components/Sidebar/Sidebar.css */
 
 aside {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 200px;
-    background-color: #f7f7f7; /* Fondo gris claro */
-    border-right: 1px solid #dcdcdc;
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 200px; /* Ancho para pantallas grandes */
+  background-color: #f7f7f7; /* Fondo gris claro */
+  border-right: 1px solid #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: #333;
+  z-index: 1000;
+  transition: transform 0.3s ease; /* Animación para el efecto de deslizamiento */
+}
+
+.pinned {
+  transform: translateX(0); /* Fijado a la izquierda */
+}
+
+.unpinned {
+  transform: translateX(-100%); /* Fuera de la vista */
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-icon {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+h5 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+hr.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #dcdcdc;
+  margin: 15px 0;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.sidebar-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  width: 100%;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.sidebar-links a:hover {
+  background-color: #e0e0e0;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  width: 100%;
+  color: #333;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: auto;
+  transition: background-color 0.3s;
+}
+
+.logout:hover {
+  background-color: #e0e0e0;
+}
+
+/* Botón para mostrar/ocultar el sidebar */
+.sidebar-toggle {
+  position: fixed;
+  left: 200px; /* Ajusta según el ancho del sidebar */
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #dcdcdc;
+  border-radius: 50%; /* Forma circular */
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: left 0.3s ease; /* Animación suave */
+}
+
+.hide {
+  left: 180px; /* Espacio a la izquierda cuando está oculto */
+}
+
+.show {
+  left: 10px; /* Espacio a la izquierda cuando está visible */
+}
+
+.toggle-icon {
+  font-size: 1.5rem; /* Tamaño del icono del botón */
+  color: #333;
+}
+
+.sidebar-links a.active {
+  background-color: #007bff; /* Color de fondo para el enlace activo */
+  color: white; /* Color del texto para el enlace activo */
+}
+
+.sidebar-links a.active:hover {
+  background-color: #0056b3; /* Color de fondo para el enlace activo al pasar el mouse */
+}
+
+/* Otros estilos aquí... */
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  aside {
+    width: 180px; /* Ancho ligeramente más pequeño para tabletas */
+  }
+}
+
+@media (max-width: 768px) {
+  aside {
+    width: 60px; /* Ancho para móviles */
+    padding: 10px;
     align-items: center;
-    padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    color: #333;
-    z-index: 1000;
   }
-  
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+
+  .sidebar-header h5 {
+    display: none; /* Oculta el texto del encabezado */
   }
-  
-  .sidebar-icon {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  h2 {
-    font-size: 0.9rem;
-    color: #333;
-    margin: 0;
-  }
-  
-  hr.divider {
-    width: 100%;
-    border: none;
-    border-top: 1px solid #dcdcdc;
-    margin: 15px 0;
-  }
-  
-  .sidebar-links {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
+
   .sidebar-links a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    width: 100%;
-    color: #333;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background-color 0.3s;
+    justify-content: center; /* Centra los enlaces */
   }
-  
-  .sidebar-links a:hover {
-    background-color: #e0e0e0;
+
+  .sidebar-links a span {
+    display: none; /* Oculta el texto en móviles */
   }
-  
-  .logout {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    width: 100%;
-    color: #333;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: auto;
-    transition: background-color 0.3s;
+}
+
+@media (max-width: 480px) {
+  .sidebar-icon {
+    font-size: 1.2rem; /* Tamaño de ícono más pequeño para móviles */
   }
-  
-  .logout:hover {
-    background-color: #e0e0e0;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    aside {
-      width: 60px;
-      padding: 10px;
-      align-items: center;
-    }
-  
-    .sidebar-header h2 {
-      display: none; /* Hide Control Panel text */
-    }
-  
-    .sidebar-links a,
-    .logout {
-      justify-content: center;
-    }
-  
-    .sidebar-links a span,
-    .logout span {
-      display: none;
-    }
-  }
-  
+}
