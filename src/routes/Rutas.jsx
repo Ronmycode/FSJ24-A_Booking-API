@@ -21,9 +21,12 @@ export default function Rutas() {
           <Route
             path="/*"
             element={
-              <div style={{ display: 'flex' }}>
+              <div className='d-flex flex-row'>
+                <div className='col-2'>
                 <Sidebar />
-                <div style={{ flex: 1, padding: '20px' }}>
+
+                </div>
+                <div className='col-10'>
                   <Routes>
                     {/* Start Accommodations routes */}
                     <Route path="Accommodations" element={<Accommodations />} />

@@ -3,6 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* cambia fondo contenedores */
+  --bs-body-bg: #FFFFFF; 
 }
 
 .logo {
@@ -47,12 +49,12 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #333;
-  background-color: #ffffff;
+
 }
 
 .main-content {
   margin-left: 200px; /* Igual al ancho del sidebar */
   padding: 20px;
   min-height: 100vh;
-  background-color: #f7f7f7; /* Fondo gris claro */
+   /* Fondo gris claro */
 }
