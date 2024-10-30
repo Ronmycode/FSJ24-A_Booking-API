@@ -1,0 +1,46 @@
+/* Asegúrate de que el contenedor del calendario se ajuste automáticamente */
+.calendar-responsive {
+  max-width: calc(100% - 220px); /* Restar el ancho del sidebar */
+  margin: 0 auto;
+  padding-left: 20px; /* Espacio adicional para no pegarse al sidebar */
+}
+
+.fc-toolbar.fc-header-toolbar {
+  flex-wrap: wrap;
+}
+
+.fc .fc-daygrid-event .fc-event-main {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Ajustes en pantallas pequeñas */
+@media (max-width: 768px) {
+  .calendar-responsive {
+    max-width: 100%; /* Full width en pantallas pequeñas */
+    padding-left: 0; /* Elimina el padding en pantallas pequeñas */
+  }
+
+  .fc-toolbar.fc-header-toolbar {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Reduce el tamaño de los botones de navegación */
+  .fc-toolbar-chunk button {
+    font-size: 0.85rem;
+    padding: 0.5em;
+  }
+
+  .fc-daygrid-event {
+    font-size: 0.75rem;
+  }
+}
+
+/* Para pantallas más grandes */
+@media (min-width: 769px) {
+  .fc-toolbar.fc-header-toolbar {
+    justify-content: space-between; /* Espacio entre elementos del toolbar */
+  }
+}

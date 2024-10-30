@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { getAccomodations } from '../services/accomodationServices'
+import { getAccommodations } from '../../services/accommodationServices'
 
-export default function Accomodations() {
-    const [accomodations, setAccomodations] = useState([])
+export default function Accommodations() {
+    const [Accommodations, setAccommodations] = useState([])
     //estado para verificar si el usuario esta autenticado
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
     //metodo para obtener la respuesta de la api
     const fetchData = async () => {
-        const response = await getAccomodations() //si esto es un exito devolvera un arreglo de alojamientos
-        setAccomodations(response);
+        const response = await getAccommodations() //si esto es un exito devolvera un arreglo de alojamientos
+        setAccommodations(response);
     }
 
     useEffect(() => {
@@ -31,11 +31,11 @@ export default function Accomodations() {
             {
                 isAuthenticated ? (
                     <>
-                        <h1>Lista de Alojamientos</h1>
+                        <h1>Accommodations List</h1>
                         <div>
                             {
                                 //mapeando los alojamientos
-                                accomodations.map((item) => {
+                                Accommodations.map((item) => {
                                     return (
                                         <div key={item.id}>
                                             <h3>{item.name}</h3>
