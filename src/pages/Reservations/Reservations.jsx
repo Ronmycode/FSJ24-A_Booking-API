@@ -83,12 +83,12 @@ export default function Reservations() {
 
   // Manejar la selección de una reserva
   const handleReservationClick = (reservation) => {
-    navigate(`./reservation/${reservation.id}`);
+    navigate(`/reservation/${reservation.id}`);
   };
 
   // Manejar la creación de una nueva reserva
   const handleNewReservation = () => {
-    navigate('./reservation-new');
+    navigate('/reservation-new');
   };
 
   // Función para obtener el estilo del evento basado en su estado
