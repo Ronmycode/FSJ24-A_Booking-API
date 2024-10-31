@@ -2,6 +2,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  --Background1: rgb(243, 244, 246);
+  --Background2: rgb(255, 255, 255);
+  --Accent1: rgb(17, 24, 39);
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -12,7 +15,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-    --bs-body-bg: #F3F4F6; /* Cambia fondo body general */
+  --bs-body-bg: #f3f4f6; /* Cambia fondo body general */
 }
 
 a {
