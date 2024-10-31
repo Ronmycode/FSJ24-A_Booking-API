@@ -1,3 +1,5 @@
+/* src/App.css */
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -20,6 +22,68 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #ffffff;
+  display: flex; /* Utilizar flexbox */
+}
+
+.main-content {
+  display:block; /* Permitir que el contenido principal use el espacio restante */
+  padding: 20px;
+  padding-left: 3rem; /* Espacio adicional a la izquierda */
+  min-height: 100vh;
+   /* Fondo gris claro */
+  background-color: #f7f7f7; /* Fondo gris claro */
+  transition: margin-left 0.3s ease; /* Agrega transición para un efecto suave */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+  #root {
+    padding: 1.5rem; /* Reducir el padding en pantallas más pequeñas */
+  }
+
+  .main-content {
+    padding-left: 2rem; /* Reducir el espacio a la izquierda */
+  }
+}
+
+@media (max-width: 992px) {
+  .main-content {
+    padding-left: 1.5rem; /* Ajustar el espacio para tabletas */
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0; /* Sin margen izquierdo en dispositivos móviles */
+    padding-left: 1rem; /* Espacio adicional en móviles */
+    padding: 10px; /* Ajusta el padding si es necesario */
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    height: 4em; /* Reducir tamaño del logo en pantallas pequeñas */
+    padding: 1em; /* Reducir padding del logo */
+  }
+
+  .card {
+    padding: 1em; /* Reducir padding en tarjetas */
+  }
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -33,28 +97,4 @@
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* src/App.css */
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #333;
-
-}
-
-.main-content {
-  margin-left: 200px; /* Igual al ancho del sidebar */
-  padding: 20px;
-  min-height: 100vh;
-   /* Fondo gris claro */
 }
