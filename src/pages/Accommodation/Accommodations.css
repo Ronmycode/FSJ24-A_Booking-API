@@ -1,0 +1,6 @@
+.dropzone {
+    border: 2px dashed #ddd !important; /* Borde discontinuo de 2px */
+    border-radius: 8px;      /* Bordes redondeados */
+    padding: 1rem;           /* Espaciado interno */
+    text-align: center;      /* Centrado del texto */
+  }

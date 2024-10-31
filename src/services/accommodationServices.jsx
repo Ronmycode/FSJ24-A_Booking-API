@@ -18,4 +18,24 @@ const getAccommodations = async () => {
     }
 }
 
-export { getAccommodations }
+const createAccommodation = async (accommodationData) => {
+    try {
+        // Realizamos la solicitud POST
+        const response = await axios.post("https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodation", 
+            accommodationData, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json' 
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error al crear el alojamiento", error);
+    }
+};
+
+export { getAccommodations, createAccommodation }
+
+

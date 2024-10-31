@@ -4,8 +4,6 @@ import Sidebar from '../components/Sidebar/Sidebar';
 import Login from '../pages/Login/Login'
 import Accommodations from '../pages/Accommodation/Accommodations'
 import Reservations from '../pages/Reservations/Reservations'
-import AccommodationDetails from '../pages/Accommodation/AccommodationDetails'
-import AccommodationsForm from '../pages/Accommodation/AccommodationsForm'
 import ReservationDetails from '../pages/Reservations/ReservationDetails'
 import ReservationForm from '../pages/Reservations/ReservationForm'
 import ReservationNew from '../pages/Reservations/ReservationNew';
@@ -30,8 +28,8 @@ export default function Rutas() {
                   <Routes>
                     {/* Start Accommodations routes */}
                     <Route path="Accommodations" element={<Accommodations />} />
-                    <Route path="Accommodation/:id" element={<AccommodationDetails />} />
-                    <Route path="Accommodation-update/:id" element={<AccommodationsForm />} />
+                    <Route path="addAccommodation" element={''} />
+                    <Route path="Accommodation-update/:id" element={''} />
                     {/* End Accommodations routes */}
   
                     {/* Start Reservations routes */}
