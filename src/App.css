@@ -5,6 +5,8 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* cambia fondo contenedores */
+  --bs-body-bg: #FFFFFF; 
 }
 
 .logo {
@@ -41,6 +43,7 @@ body {
   padding: 20px;
   padding-left: 3rem; /* Espacio adicional a la izquierda */
   min-height: 100vh;
+   /* Fondo gris claro */
   background-color: #f7f7f7; /* Fondo gris claro */
   transition: margin-left 0.3s ease; /* Agrega transición para un efecto suave */
 }
