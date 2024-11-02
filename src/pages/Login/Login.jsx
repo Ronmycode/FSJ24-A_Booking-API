@@ -11,6 +11,7 @@ import {
   QuestionCircleFill,
   ShieldShaded,
   KeyFill,
+  EnvelopeFill,
 } from "react-bootstrap-icons";
 
 export default function Login() {
@@ -43,16 +44,17 @@ export default function Login() {
   };
 
   return (
-    <div className="Login-wrapper">
+    <div className="Login-wrapper container">
       <div className="Login-module">
-        <h1>{<BoxArrowInRight />} Iniciar Sesión</h1>
-        <h5>
-          {<InfoCircleFill />}Ingresa tus credenciales para acceder al sistema
-        </h5>
+        <p className="Login-greeting">{<BoxArrowInRight />} Iniciar Sesión</p>
+        <p className="Login-direction">
+          {<InfoCircleFill />} Ingresa tus credenciales para acceder al sistema
+        </p>
         <form onSubmit={handleSubmit(loginForm)}>
-          <div className="">
-            <label>Correo Electronico</label>
+          <div className="Login-email space">
+            <label className="">Correo Electronico</label>
             <input
+              className="w-100 login-input"
               placeholder="correo@ejemplo.com"
               type="email"
               {...register("email", {
@@ -65,10 +67,15 @@ export default function Login() {
             />
             {errors.email && <span>{errors.email.message}</span>}
           </div>
-          <div>
-            <p>{<KeyFill />} Olvidates tu contraseña</p>
-            <label>Contraseña</label>
+          <div className="Login-password space">
+            <div className="row">
+              <label className="col">Contraseña</label>
+              <p className="col-auto forgot-pass">
+                {<KeyFill />} Olvidates tu contraseña
+              </p>
+            </div>
             <input
+              className="login-input w-100"
               placeholder="*****"
               type="password"
               {...register("password", {
@@ -81,16 +88,18 @@ export default function Login() {
             />
             {errors.password && <span>{errors.password.message}</span>}
           </div>
-          <input type="checkbox" />
-          <label>Mantener session iniciada</label>
+          <div className="space input-checkbox">
+            <input className="Login-checkbox" type="checkbox" id="myCheckbox" />
+            <label for="myCheckbox">Mantener session iniciada</label>
+          </div>
           <div>
-            <button type="submit">
+            <button className="w-100 mb-4" type="submit">
               <BoxArrowInRight /> Iniciar sesión
             </button>
             <p>
               <QuestionCircleFill />
               ¿Necesitas ayuda?
-              <a href="#">Contacta soporte</a>
+              <a href="#"> Contacta soporte</a>
             </p>
           </div>
         </form>
