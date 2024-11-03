@@ -2,7 +2,7 @@
 import Card from "react-bootstrap/Card";
 import { Trash, Pencil } from "react-bootstrap-icons";
 
-function CustomCard({ name, description, direction, img }) {
+function CustomCard({ name, description, direction, img, handleEdit }) {
   return (
   
       <div className="container  card card-body p-4">
@@ -22,8 +22,12 @@ function CustomCard({ name, description, direction, img }) {
           <img src={img} className="w-100 rounded-1" />
           </div>
           <div className="align-items-center col-2">
-            <Trash className="me-2" />
-            <Pencil />
+            <button onClick={handleEdit}  className="btn btn-outline text-primary ">
+            <Pencil className="fs-5" />
+            </button>
+            <button className="btn btn-outline text-danger">
+            <Trash className="fs-5" />
+            </button>
           </div>
         </div>
       </div>

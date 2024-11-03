@@ -1,13 +1,18 @@
-// MyModalForm.js
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { useDropzone } from 'react-dropzone';
 import './Accommodations.css'
 
-const AccommodationModal = ({ isOpen, onClose, onSubmit }) => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [selectedImage, setSelectedImage] = React.useState(null);
+const AccommodationModal = ({ isOpen, onClose, onSubmit, initialData = {} }) => {
+  const { register, handleSubmit,reset,  formState: { errors } } = useForm();
+  const [selectedImage, setSelectedImage] = React.useState({ defaultValues: {
+    name: '',
+    address: '',
+    description: ''
+  }});
+  
 
   // Configuración de react-dropzone
   const { getRootProps, getInputProps } = useDropzone({
@@ -22,11 +27,36 @@ const AccommodationModal = ({ isOpen, onClose, onSubmit }) => {
       }
     }
   });
+  useEffect(() => {
+    if (initialData) {
+      // Rellena el formulario con los datos de `initialData`
+      reset({
+        name: initialData.name || '',
+        address: initialData.address || '',
+        description: initialData.description || ''
+      });
+      setSelectedImage(initialData.image ? { preview: initialData.image } : null);
+    } else {
+      reset(); // Limpia el formulario si no hay `initialData`
+      setSelectedImage(null);
+    }
+  }, [initialData, reset]);
+  const handleClose = () => {
+    reset({
+      name: '',
+      address: '',
+      description: ''
+    });
+    setSelectedImage(null);
+    onClose();
+  };
+
   if (!isOpen) return null; // No renderizar si isOpen es false
 
   // Función que maneja el envío del formulario
   const handleFormSubmit = (data) => {
-    onSubmit({ ...data, image: selectedImage }); // Enviar datos y la imagen al componente padre
+    onSubmit({...data, image: selectedImage, id: initialData.id,  }); // Enviar datos y la imagen al componente padre
+    // console.log(data);
     onClose(); 
   };
   return (
@@ -37,7 +67,8 @@ const AccommodationModal = ({ isOpen, onClose, onSubmit }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title text-start">Nuevo Alojamiento</h5>
-            <button type="button" className="btn-close" aria-label="Close" onClick={onClose}></button>
+            <button type="button" className="btn-close" aria-label="Close" 
+            onClick={handleClose}></button>
           </div>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
             <div className="modal-body text-start">
@@ -55,16 +86,16 @@ const AccommodationModal = ({ isOpen, onClose, onSubmit }) => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="direction" className="form-label text-start">
+                <label htmlFor="address" className="form-label text-start">
                   Direccion 
                 </label>
                 <input
                   type="text"
-                  className={`form-control ${errors.direction ? 'is-invalid' : ''}`}
-                  id="direction"
-                  {...register('direction', { required: 'Direction is required' })}
+                  className={`form-control ${errors.address ? 'is-invalid' : ''}`}
+                  id="address"
+                  {...register('address', { required: 'Address is required' })}
                 />
-                {errors.direction && <div className="invalid-feedback">{errors.direction.message}</div>}
+                {errors.direction && <div className="invalid-feedback">{errors.address.message}</div>}
               </div>
 
               <div className="mb-3">
@@ -96,7 +127,7 @@ const AccommodationModal = ({ isOpen, onClose, onSubmit }) => {
              
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={onClose}>
+              <button type="button" className="btn btn-outline" onClick={handleClose}>
                 Cancelar
               </button>
               <button type="submit" className="btn btn-dark">
