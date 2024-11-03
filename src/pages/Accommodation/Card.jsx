@@ -1,10 +1,11 @@
 
 import Card from "react-bootstrap/Card";
 import { Trash, Pencil } from "react-bootstrap-icons";
+import './Accommodations.css'
 
 function CustomCard({ name, description, direction, img, handleEdit }) {
   return (
-  
+      // card body
       <div className="container  card card-body p-4">
         <div className="d-flex row justify-content-between  align-items-center">
           <div className="text-start col-6 ">
@@ -25,9 +26,9 @@ function CustomCard({ name, description, direction, img, handleEdit }) {
             <button onClick={handleEdit}  className="btn btn-outline text-primary ">
             <Pencil className="fs-5" />
             </button>
-            <button className="btn btn-outline text-danger">
+            {/* <button className="btn btn-outline text-danger">
             <Trash className="fs-5" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

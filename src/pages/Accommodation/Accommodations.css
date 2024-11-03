@@ -1,6 +1,12 @@
 .dropzone {
-    border: 2px dashed #ddd !important; /* Borde discontinuo de 2px */
-    border-radius: 8px;      /* Bordes redondeados */
-    padding: 1rem;           /* Espaciado interno */
-    text-align: center;      /* Centrado del texto */
+    border: 2px dashed #ddd !important;
+    border-radius: 8px;      
+    padding: 1rem;         
+    text-align: center;      
   }
+
+.head-accommodations{
+  max-width: 950px;
+
+
+}

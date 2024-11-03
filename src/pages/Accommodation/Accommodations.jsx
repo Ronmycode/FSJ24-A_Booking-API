@@ -4,6 +4,7 @@ import { PlusLg } from "react-bootstrap-icons";
 
 import CustomCard from "./Card";
 import AccommodationModal from "./AccommodationModal";
+import Swal from "sweetalert2";
 
 // import '.accommodations.css'
 export default function Accommodations() {
@@ -13,19 +14,20 @@ export default function Accommodations() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
   const [isEditing, setIsEditing] = useState(false);
-  const [editingAccommodationId, setEditingAccommodationId] = useState(null);
   const [editingAccommodationData, setEditingAccommodationData] = useState(null);
 
 
-  //metodo para obtener la respuesta de la api
+  //method to get the response from the api
   const fetchData = async () => {
     try {
       const response = await getAccommodations();
       setAccommodations(response);
+      console.log(response);
+
     } catch (error) {
       console.error("Error al cargar alojamientos:", error);
     } finally {
-      setIsLoading(false); // Cambia el estado de carga
+      setIsLoading(false);
     }
   };
 
@@ -33,36 +35,61 @@ export default function Accommodations() {
     try {
       const response = await createAccommodation(newAcommodation);
       console.log('pintar en el principal', response);
+      Swal.fire({
+        title: "¡Alojamiento agregado!",
+        text: "El nuevo alojamiento se ha agregado exitosamente.",
+        icon: "success",
+        confirmButtonText: "Aceptar",
+        timer: 2000,
+      });
       
     } catch (error) {
       console.error("Error al crear la acomodación:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Hubo un problema al agregar el alojamiento. Inténtalo de nuevo.",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+        timer: 2000,
+      });
     } finally {
-      setModalOpen(false); // Cierra el modal
+      setModalOpen(false); // close modal
       await fetchData();
     }
   };
   const handleEdit = (item) => {
     setIsEditing(true);
-    setEditingAccommodationData(item); // Pasa los datos actuales al modal
+    setEditingAccommodationData(item);
     setModalOpen(true);
     console.log('editing..',item)
   };
 
   const updateData = async (updateData) => {
-    console.log('updateData', updateData);
-    
-    // Validar que se tenga el id y los datos necesarios
+    // validation id
     if (!editingAccommodationData || !editingAccommodationData.id) {
       console.error("No se puede actualizar: ID de alojamiento no encontrado.");
-      return; // Salir si no hay un ID
+      return; 
     }
   
     try {
       const response = await updateAccommodation(editingAccommodationData.id, updateData);
-      console.log('Alojamiento actualizado:', response);
+      console.log('Accommodation update:', response);
+      Swal.fire({
+        title: "¡Accommodation update!",
+        text: "The new accommodation has been added successfully.",
+        icon: "success",
+        confirmButtonText: "Accept",
+        timer: 2000,
+      });
     } catch (error) {
-      console.error("Error al actualizar el alojamiento:", error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+      console.error("error", error);
+      Swal.fire({
+        title: "Error",
+        text: "There was a problem adding the accommodation. Try again.",
+        icon: "error",
+        confirmButtonText: "Accept",
+        timer: 2000,
+      });
     } finally {
       setModalOpen(false);
       setIsEditing(false);
@@ -83,43 +110,52 @@ export default function Accommodations() {
   }, []);
 
   return (
-    <>
-      <div className="w-auto d-flex justify-content-between">
-        <h2>Accommodations</h2>
-        <button className="d-flex align-items-center gap-2 px-3 rounded-2" onClick={() => setModalOpen(true)}>
-          <PlusLg size={16} />
-          Nuevo Alojamiento
-        </button>
+ <>
+  <div className=" d-flex justify-content-between align-items-center mb-4">
+    <h2 className="">Accommodations</h2>
+    <button
+      className="d-flex align-items-center gap-2 px-3 rounded-2"
+      onClick={() => setModalOpen(true)}
+    >
+      <PlusLg size={16} />
+      Nuevo Alojamiento
+    </button>
+  </div>
+  <div className="w-100 d-flex justify-content-between align-items-center">
+  {isLoading ? (
+    <div className=" d-flex justify-content-center align-items-center" style={{width:'1140px', height: '60vh' }}>
+   <div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  </div>
+    ) : isAuthenticated ? (
+      <div className="col-12">
+        {accommodations.map((item) => (
+          <div key={item.id} className="mb-4">
+            <CustomCard
+              name={item.name}
+              direction={item.address}
+              description={item.description}
+              img={item.image}
+              handleEdit={() => handleEdit(item)}
+            />
+          </div>
+        ))}
       </div>
+    ) : (
+      <h2 className="text-center text-danger">No estás autorizado, inicia sesión</h2>
+    )}
+  </div>
+   
 
-      {/** validamos si la persona esta autenticada */}
-      <div>
-      {isLoading ? (
-        <div>Cargando...</div>
-      ) : isAuthenticated ? (
-        <div>
-          {accommodations.map((item) => (
-            <div key={item.id} className="mb-4 mt-4">
-              <CustomCard
-                name={item.name}
-                direction={item.address}
-                description={item.description}
-                img={item.image}
-                handleEdit={()=> handleEdit(item)}
-              />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <h2>No estás autorizado, inicia sesión</h2>
-      )}
-        <AccommodationModal 
-        isOpen={isModalOpen} 
-        onClose={() => setModalOpen(false)}    
-        onSubmit={(data) => isEditing ? updateData(data) : postData(data)}
-        initialData={isEditing ? editingAccommodationData : null}
-        />
-      </div>
-    </>
+
+  <AccommodationModal
+    isOpen={isModalOpen}
+    onClose={() => setModalOpen(false)}
+    onSubmit={(data) => (isEditing ? updateData(data) : postData(data))}
+    initialData={isEditing ? editingAccommodationData : null}
+  />
+</>
+
   );
 }
