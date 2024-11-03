@@ -5,11 +5,9 @@ import { PlusLg } from "react-bootstrap-icons";
 import CustomCard from "./Card";
 import AccommodationModal from "./AccommodationModal";
 import Swal from "sweetalert2";
-
-// import '.accommodations.css'
 export default function Accommodations() {
   const [accommodations, setAccommodations] = useState([]);
-  //estado para verificar si el usuario esta autenticado
+  //states
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true); 
@@ -98,11 +96,11 @@ export default function Accommodations() {
     }
   };
   useEffect(() => {
-    //validamos si el token existe
+    //validation token
     const session_token = sessionStorage.getItem("token_bookings");
     if (session_token) {
       setIsAuthenticated(true);
-      //va poder visualizar los alojamientos
+      //get accommodations 
       fetchData();
     } else {
       setIsAuthenticated(false);
@@ -146,9 +144,6 @@ export default function Accommodations() {
       <h2 className="text-center text-danger">No estás autorizado, inicia sesión</h2>
     )}
   </div>
-   
-
-
   <AccommodationModal
     isOpen={isModalOpen}
     onClose={() => setModalOpen(false)}

@@ -41,7 +41,7 @@ const AccommodationModal = ({
   });
   useEffect(() => {
     if (initialData) {
-      // Rellena el formulario con los datos de `initialData`
+      //Fill the form with the data from `initialData`
       reset({
         name: initialData.name || "",
         address: initialData.address || "",
@@ -51,7 +51,7 @@ const AccommodationModal = ({
         initialData.image ? { preview: initialData.image } : null
       );
     } else {
-      reset(); // Limpia el formulario si no hay `initialData`
+      reset(); // Clear the form if there is no `initialData`
       setSelectedImage(null);
     }
   }, [initialData, reset]);
@@ -65,9 +65,9 @@ const AccommodationModal = ({
     onClose();
   };
 
-  if (!isOpen) return null; // No renderizar si isOpen es false
+  if (!isOpen) return null;
 
-  // Función que maneja el envío del formulario
+  // Function that handles form submission
   const handleFormSubmit = (data) => {
     onSubmit({ ...data, image: selectedImage });
   };
@@ -169,7 +169,7 @@ const AccommodationModal = ({
                   )}
                 </div>
 
-                {/* Área de arrastrar y soltar */}
+                {/* Drag and drop area */}
                 <div
                   {...getRootProps()}
                   className="border border-dashed rounded p-4 text-center dropzone"
