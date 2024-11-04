@@ -80,14 +80,6 @@ export default function ReservationNew() {
       return;
     }
 
-    // Validar que la diferencia entre la fecha de inicio y la fecha de fin no sea mayor a un mes
-    const oneMonthLater = new Date(checkInDate);
-    oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-    if (checkOutDate > oneMonthLater) {
-      setErrorMessage('La fecha de fin no debe tener más de un mes de diferencia con respecto a la fecha de inicio.');
-      return;
-    }
-
     // Lógica para enviar los datos de la reservación
     const reservationData = {
       booking,
@@ -100,10 +92,10 @@ export default function ReservationNew() {
 
     try {
       await createReservation(reservationData);
-      setShowSuccessMessage(true); // Mostrar la alerta de éxito
+      setShowSuccessMessage(true); 
       setTimeout(() => {
         setShowSuccessMessage(false);
-        navigate('/reservations'); // Navegar después de un tiempo
+        navigate('/reservations'); 
       }, 3000);
     } catch (error) {
       setErrorMessage('Hubo un error al crear la reservación.');

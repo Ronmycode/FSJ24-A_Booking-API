@@ -38,7 +38,7 @@ const createReservation = async (reservationData) => {
     }
 };
 
-// Actualizar reservación
+// Actualizar estado de reservación
 const updateReservation = async (id, reservationData) => {
     try {
         const response = await axios.patch(
