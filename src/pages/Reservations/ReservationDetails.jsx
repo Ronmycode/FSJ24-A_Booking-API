@@ -71,6 +71,8 @@ function ReservationDetails() {
   };
 
   const handleCancel = async () => {
+    /* console.log("cancel is being cllaed"); */
+
     if (reservation && reservation.status === "pending") {
       const updatedReservation = await setReservationStatus(
         reservation.id,

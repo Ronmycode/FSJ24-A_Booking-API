@@ -25,6 +25,7 @@
   border-radius: 5px;
   border: 1px solid lightgray;
   background-color: var(--Background2);
+  color: black;
 }
 
 .Login-password p {
