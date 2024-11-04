@@ -1,147 +1,87 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Form, Modal, Row, Col, Alert } from 'react-bootstrap';
-import { useNavigate, useParams } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
-import moment from 'moment';
-import { getReservations } from '../../services/reservationServices';
-import 'moment/locale/es';
+import React from 'react';
+import { Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-moment.locale('es');
+function ReservationDetails() {
+    const navigate = useNavigate();
 
-export default function ReservationDetails() {
-  const navigate = useNavigate(); 
-  const { id } = useParams(); 
-  const [accommodation, setAccommodation] = useState('');
-  const [customerName, setCustomerName] = useState('');
-  const [checkInDate, setCheckInDate] = useState(null);
-  const [checkOutDate, setCheckOutDate] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  useEffect(() => {
-    const fetchReservation = async () => {
-      try {
-        const reservation = await getReservations(id); 
-        setAccommodation(reservation.accommodation); 
-        setCustomerName(reservation.customerName);
-        setCheckInDate(moment(reservation.checkInDate).toDate()); 
-        setCheckOutDate(moment(reservation.checkOutDate).toDate());
-      } catch (error) {
-        setErrorMessage("No se encontró la reservación.");
-        console.error(error);
-      }
+    const handleClose = () => {
+        navigate('/reservations'); // Redirige a la pantalla Reservations.jsx
     };
 
-    fetchReservation();
-  }, [id]);
+    return (
+        <Container className="mt-3">
+            <Card className="shadow">
+                <Card.Body>
+                    <Row className="mb-3">
+                        <Col>
+                            <h5>Detalles de la Reservación</h5>
+                        </Col>
+                        <Col className="text-end">
+                            <span className="badge bg-warning text-dark">Pendiente</span>
+                        </Col>
+                    </Row>
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrorMessage('');
+                    <Row className="mb-3">
+                        <Col>
+                            <small className="text-muted">ID: #N/A</small>
+                        </Col>
+                    </Row>
 
-    // Validar que la fecha de fin no sea menor que la fecha de inicio
-    if (checkOutDate < checkInDate) {
-      setErrorMessage('La fecha de fin no puede ser menor que la fecha de inicio.');
-      return;
-    }
+                    <Row className="mb-3">
+                        <Col>
+                            <h6>Sin nombre</h6>
+                            <p className="text-muted">Dirección no disponible</p>
+                        </Col>
+                    </Row>
 
-    // Validar que la fecha de inicio no sea menor a la fecha actual
-    if (checkInDate < new Date()) {
-      setErrorMessage('La fecha de inicio no puede ser menor que la fecha actual.');
-      return;
-    }
+                    <Row className="mb-3">
+                        <Col className="bg-light" style={{ height: '150px' }}>
+                            {/* Aquí puedes integrar un mapa usando una API como Google Maps */}
+                        </Col>
+                    </Row>
 
-    // Validar que la diferencia entre la fecha de inicio y la fecha de fin no sea mayor a un mes
-    const oneMonthLater = new Date(checkInDate);
-    oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-    if (checkOutDate > oneMonthLater) {
-      setErrorMessage('La fecha de fin no debe tener más de un mes de diferencia con respecto a la fecha de inicio.');
-      return;
-    }
+                    <Row className="mb-3">
+                        <Col>
+                            <div>
+                                <strong>Check-in</strong>
+                                <p>Jueves, 24 de octubre de 2024</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div>
+                                <strong>Check-out</strong>
+                                <p>Jueves, 24 de octubre de 2024</p>
+                            </div>
+                        </Col>
+                    </Row>
 
-  };
+                    <Row className="mb-3">
+                        <Col>
+                            <strong>Información del Huésped</strong>
+                            <p className="text-muted">Huésped no especificado</p>
+                        </Col>
+                    </Row>
 
-  const handleClose = () => {
-    navigate('/reservations');
-  };
+                    <Row className="mb-3">
+                        <Col className="bg-light p-2 rounded">
+                            <strong>Resumen de la Estancia</strong>
+                            <p className="text-primary">0 noches</p>
+                        </Col>
+                    </Row>
 
-  return (
-    <Modal show={true} onHide={handleClose} centered>
-      <Modal.Header closeButton>
-        <Modal.Title>Detalles de Reservación</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        {errorMessage && (
-          <Alert variant="danger" className="mb-3">
-            {errorMessage}
-          </Alert>
-        )}
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formAccommodation" className="mb-3">
-            <Form.Label>Alojamiento</Form.Label>
-            <Form.Select
-              value={accommodation}
-              onChange={(e) => setAccommodation(e.target.value)}
-              required
-            >
-              <option value="">Seleccionar alojamiento</option>
-              <option value="Apartamento Centro">Apartamento Centro</option>
-              <option value="Casa de Campo">Casa de Campo</option>
-            </Form.Select>
-          </Form.Group>
-
-          <Form.Group controlId="formCustomerName" className="mb-3">
-            <Form.Label>Huésped</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nombre del huésped"
-              value={customerName}
-              onChange={(e) => setCustomerName(e.target.value)}
-              maxLength={50}
-              required
-            />
-          </Form.Group>
-
-          <Row>
-            <Col>
-              <Form.Group controlId="formCheckInDate" className="mb-3">
-                <Form.Label>Fecha de inicio</Form.Label>
-                <DatePicker
-                  selected={checkInDate}
-                  onChange={(date) => setCheckInDate(date)}
-                  dateFormat="dd/MM/yyyy"
-                  className="form-control"
-                  placeholderText="Seleccionar fecha"
-                  required
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="formCheckOutDate" className="mb-3">
-                <Form.Label>Fecha de fin</Form.Label>
-                <DatePicker
-                  selected={checkOutDate}
-                  onChange={(date) => setCheckOutDate(date)}
-                  dateFormat="dd/MM/yyyy"
-                  className="form-control"
-                  placeholderText="Seleccionar fecha"
-                  required
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <div className="d-flex justify-content-between">
-            <Button variant="secondary" type="button" onClick={handleClose}>
-              Cancelar
-            </Button>
-            <Button variant="dark" type="submit">
-              Guardar
-            </Button>
-          </div>
-        </Form>
-      </Modal.Body>
-    </Modal>
-  );
+                    <Row className="justify-content-between mt-3">
+                        <Col className="text-center">
+                            <Button variant="danger">Cancelar Reservación</Button>
+                        </Col>
+                        <Col className="text-end">
+                            <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
+                        </Col>
+                    </Row>
+                </Card.Body>
+            </Card>
+        </Container>
+    );
 }
 
+export default ReservationDetails;
