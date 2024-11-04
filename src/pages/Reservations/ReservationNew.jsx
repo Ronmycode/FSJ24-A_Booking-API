@@ -21,13 +21,6 @@ export default function ReservationNew() {
     e.preventDefault();
     setErrorMessage('');
 
-    // Validar que el nombre no tenga caracteres especiales
-    const nameRegex = /^[a-zA-Z\s]*$/;
-    if (!nameRegex.test(customerName)) {
-      setErrorMessage('El nombre del huésped no debe contener caracteres especiales.');
-      return;
-    }
-
     // Validar que la fecha de fin no sea menor que la fecha de inicio
     if (checkOutDate < checkInDate) {
       setErrorMessage('La fecha de fin no puede ser menor que la fecha de inicio.');

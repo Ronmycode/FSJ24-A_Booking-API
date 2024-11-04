@@ -18,6 +18,20 @@ const getAccommodations = async () => {
     }
 }
 
+const getAccommodationById = async (id) => {
+    try {
+        const response = await axios.get(`https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodation/${id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error al obtener alojamiento por ID", error);
+        throw error;
+    }
+};
+
 // Create Accommodation
 const createAccommodation = async (accommodationData) => {
     try {
@@ -61,6 +75,6 @@ const updateAccommodation = async (id, accommodationData) => {
 
 
 
-export { getAccommodations, createAccommodation, updateAccommodation }
+export { getAccommodations, getAccommodationById, createAccommodation, updateAccommodation }
 
 
