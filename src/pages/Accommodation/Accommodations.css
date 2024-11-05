@@ -1,0 +1,20 @@
+.dropzone {
+    border: 2px dashed #ddd !important;
+    border-radius: 8px;      
+    padding: 1rem;         
+    text-align: center;      
+  }
+
+.head-accommodations{
+  max-width: 950px;
+}
+
+@media (max-width: 540px) {
+  .flex-custom-media {
+    flex-direction: column !important;
+  
+  }
+  .width-media{
+    width: 100%;
+  }
+}
