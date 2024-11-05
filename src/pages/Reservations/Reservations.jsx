@@ -72,7 +72,7 @@ export default function Reservations() {
   }, [selectedStatus, selectedAccommodation, searchUser, reservations]);
 
   const handleEventClick = (info) => {
-    navigate(`/ReservationDetails/${info.event.id}`);
+    navigate(`/Reservation/${info.event.id}`);
   };
 
   const handleNewReservation = () => {
