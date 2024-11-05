@@ -6,8 +6,7 @@ const token = sessionStorage.getItem('token_bookings')
 // get accommodation
 const getAccommodations = async () => {
     try{
-
-        const response = await axios.get("https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodations", {
+     const response = await axios.get("https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodations", {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
