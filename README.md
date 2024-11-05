@@ -2,7 +2,8 @@
 
 This project is an accommodation and reservation management application developed with **React**. It allows users to log in, manage accommodations, and make reservations easily. The application is designed to be deployed in a production environment and uses several React libraries to facilitate form handling, route navigation, and API integration.
 
-> [!NOTE] Grupo número 6<br/>
+> [!NOTE]
+> Grupo número 6<br/>
 > Steven Josué Trujillo Cuéllar <br/>
 > Rafael Edgardo Arévalo Vanegas<br/>
 > Mario José Pinto Amaya<br/>
