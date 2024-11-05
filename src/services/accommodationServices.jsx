@@ -1,17 +1,20 @@
 import axios from "axios";
 
 //get token
-const token = sessionStorage.getItem('token_bookings')
+
 
 // get accommodation
 const getAccommodations = async () => {
     try{
      const response = await axios.get("https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodations", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`
+           
             }
-        });        
+        });   
+        
         return response.data;
+      
     }catch(error){
         console.error("Error al obtener los alojamientos", error);
     }
@@ -21,7 +24,7 @@ const getAccommodationById = async (id) => {
     try {
         const response = await axios.get(`https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodation/${id}`, {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`
             }
         });
         return response.data;
@@ -38,7 +41,7 @@ const createAccommodation = async (accommodationData) => {
             accommodationData, 
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`,
                     'Content-Type': 'application/json' 
                 }
             }
@@ -57,7 +60,7 @@ const updateAccommodation = async (id, accommodationData) => {
         const response = await  axios.put(`https://apibookingsaccomodations-production.up.railway.app/api/V1/accomodation/${id}`,
          accommodationData,
         { headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`,
             'Content-Type': 'application/json' 
          }
         }

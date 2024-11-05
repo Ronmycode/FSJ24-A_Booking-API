@@ -90,7 +90,7 @@ export default function Login() {
           </div>
           <div className="space input-checkbox">
             <input className="Login-checkbox" type="checkbox" id="myCheckbox" />
-            <label for="myCheckbox">Mantener session iniciada</label>
+            <label htmlFor="myCheckbox">Mantener session iniciada</label>
           </div>
           <div>
             <button className="w-100 mb-4" type="submit">

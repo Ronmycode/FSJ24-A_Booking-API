@@ -9,6 +9,7 @@ const AccommodationModal = ({
   onClose,
   onSubmit,
   initialData = {},
+  isEdit= null,
 }) => {
   const {
     register,
@@ -83,7 +84,7 @@ const AccommodationModal = ({
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title text-start">Nuevo Alojamiento</h5>
+            {isEdit ? "Edit Accommodation" : "New Accommodation"}
               <button
                 type="button"
                 className="btn-close"
@@ -95,7 +96,7 @@ const AccommodationModal = ({
               <div className="modal-body text-start">
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
-                    Nombre
+                   Name
                   </label>
                   <input
                     type="text"
@@ -121,7 +122,7 @@ const AccommodationModal = ({
 
                 <div className="mb-3">
                   <label htmlFor="address" className="form-label text-start">
-                    Dirección
+                    Direction
                   </label>
                   <input
                     type="text"
@@ -150,7 +151,7 @@ const AccommodationModal = ({
                     htmlFor="description"
                     className="form-label text-start"
                   >
-                    Descripción
+                    Description
                   </label>
                   <textarea
                     className={`form-control ${
@@ -189,7 +190,7 @@ const AccommodationModal = ({
                     />
                   ) : (
                     <p className="text-muted">
-                      <strong>Subir una imagen o arrastra y suelta</strong>
+                      <strong>Upload an image or drag and drop</strong>
                       <br />
                       PNG, JPG, GIF hasta 10MB
                     </p>
@@ -203,10 +204,10 @@ const AccommodationModal = ({
                   className="btn btn-outline"
                   onClick={handleClose}
                 >
-                  Cancelar
+                  Cancel
                 </button>
                 <button type="submit" className="btn btn-dark">
-                  <i className="bi bi-send-fill"></i> Guardar Cambios
+                  <i className="bi bi-send-fill"></i> Save Changes
                 </button>
               </div>
             </form>

@@ -1,14 +1,12 @@
 import axios from "axios";
 
-// Obtenemos el token que se guarda en sessionStorage
-const token = sessionStorage.getItem('token_bookings');
 
 // Obtener todas las reservaciones
 const getReservations = async () => {
     try {
         const response = await axios.get("https://apibookingsaccomodations-production.up.railway.app/api/V1/bookings", {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`
             }
         });
         return response.data;
@@ -26,7 +24,7 @@ const createReservation = async (reservationData) => {
             reservationData,
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`,
                     'Content-Type': 'application/json',
                 }
             }
@@ -46,7 +44,7 @@ const updateReservation = async (id, reservationData) => {
             reservationData,
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${sessionStorage.getItem('token_bookings')}`,
                     'Content-Type': 'application/json',
                 }
             }

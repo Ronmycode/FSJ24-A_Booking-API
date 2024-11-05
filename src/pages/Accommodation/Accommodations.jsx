@@ -19,6 +19,12 @@ export default function Accommodations() {
   const fetchData = async () => {
     try {
       const response = await getAccommodations();
+      const token = sessionStorage.getItem('token_bookings');
+      if (!token) {
+          console.error("No token found. User is not authenticated.");
+          setIsLoading(false);
+          return; // Detener la ejecución si no hay token
+      }
       setAccommodations(response);
 
     } catch (error) {
@@ -60,6 +66,11 @@ export default function Accommodations() {
     setModalOpen(true);
     console.log('editing..',item)
   };
+
+  const onClose = () => {
+    setModalOpen(false)
+    setIsEditing(false)
+  }
 
   const updateData = async (updateData) => {
     // validation id
@@ -111,21 +122,24 @@ export default function Accommodations() {
 
   <div className="w-100 d-flex flex-column flex-md-row justify-content-center align-items-center">
   {isLoading ? (
-    <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
-   <div className="spinner-border" role="status">
-  <span className="visually-hidden">Loading...</span>
-</div>
+  <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
+  <div className="text-center">
+    <div className="spinner-border" role="status"></div>
+    <div className="d-flex flex-column">
+      <span>Loading...</span>
+    </div>
   </div>
+</div>
     ) : isAuthenticated ? (
       <div>
     <div className=" d-flex  justify-content-between align-items-center gap-1 mb-4 flex-custom-media">
     <h2 className="d-flex align-items-start col col-lg-9 col-md-8 col-sm-6 width-media">Accommodations</h2>
     <button
-      className="d-flex col col-lg-3 justify-content-center col-md-4 col-sm-6  align-items- gap-2 px-3 rounded-2 width-media"
+      className="d-flex col col-lg-3 justify-content-center col-md-4 col-sm-6  align-items-center gap-2 px-3 rounded-2 width-media"
       onClick={() => setModalOpen(true)}
     >
       <PlusLg size={16} />
-      Nuevo Alojamiento
+      New Accommodation
     </button>
   </div>
         {accommodations.map((item) => (
@@ -141,14 +155,15 @@ export default function Accommodations() {
         ))}
       </div>
     ) : (
-      <h2 className="text-center text-danger">No estás autorizado, inicia sesión</h2>
+      <h2 className="text-center text-danger">You are not authorized, log in</h2>
     )}
   </div>
   <AccommodationModal
     isOpen={isModalOpen}
-    onClose={() => setModalOpen(false)}
+    onClose={ onClose}
     onSubmit={(data) => (isEditing ? updateData(data) : postData(data))}
-    initialData={isEditing ? editingAccommodationData : null}
+    initialData={isEditing ? editingAccommodationData : null}  
+    isEdit={isEditing}
   />
 </>
 
