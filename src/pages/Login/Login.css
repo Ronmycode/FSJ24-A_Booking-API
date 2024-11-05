@@ -1,0 +1,87 @@
+.login-wrapper {
+  background-color: var(--Background1);
+}
+.Login-module {
+  background-color: var(--Background2);
+  padding: 3rem;
+  margin: 3rem 0;
+}
+
+.Login-greeting {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.Login-direction {
+  font-size: 0.8rem;
+}
+
+.forgot-pass {
+  color: #646cff;
+}
+.login-input {
+  padding: 0.5rem;
+  margin: 0.25rem;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: var(--Background2);
+  color: black;
+}
+
+.Login-password p {
+  margin: 0;
+}
+
+.space {
+  text-align: left;
+  margin: 1rem 0;
+  padding: 0.25rem;
+}
+input[type="checkbox"] {
+  color: aqua;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+  display: none; /* Hide the default checkbox */
+}
+
+/* Style the label to create a custom checkbox */
+.input-checkbox label {
+  position: relative;
+  padding-left: 30px; /* Space for the custom checkbox */
+  cursor: pointer; /* Cursor changes to pointer */
+}
+
+/* Custom checkbox appearance */
+label::before {
+  content: ""; /* Create a custom checkbox */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc;
+  background-color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+/* Change background color when checkbox is checked */
+input[type="checkbox"]:checked + label::before {
+  background-color: #4caf50; /* Background color when checked */
+  border-color: #4caf50; /* Change border color to match background */
+}
+
+/* Optional: Change the checkmark appearance */
+input[type="checkbox"]:checked + label::after {
+  content: ""; /* Create a checkmark */
+  position: absolute;
+  left: 5px; /* Position the checkmark */
+  top: 10px; /* Position the checkmark */
+  width: 5px; /* Checkmark width */
+  height: 10px; /* Checkmark height */
+  border: solid white; /* Checkmark color */
+  border-width: 0 2px 2px 0; /* Create the checkmark shape */
+  transform: rotate(45deg); /* Rotate to make it look like a checkmark */
+}

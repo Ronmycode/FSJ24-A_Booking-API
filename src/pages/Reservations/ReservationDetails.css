@@ -1,0 +1,9 @@
+.reservation-details form {
+  background-color: var(--Background2);
+  padding: 3rem;
+  margin: 3rem;
+}
+
+form li {
+  list-style: none;
+}
