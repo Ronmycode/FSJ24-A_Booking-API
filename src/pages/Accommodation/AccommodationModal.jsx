@@ -70,6 +70,11 @@ const AccommodationModal = ({
   // Function that handles form submission
   const handleFormSubmit = (data) => {
     onSubmit({ ...data, image: selectedImage });
+    reset({
+      name: "",
+      address: "",
+      description: "",
+    });
   };
   return (
     <>

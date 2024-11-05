@@ -20,7 +20,6 @@ export default function Accommodations() {
     try {
       const response = await getAccommodations();
       setAccommodations(response);
-      console.log(response);
 
     } catch (error) {
       console.error("Error al cargar alojamientos:", error);
@@ -32,7 +31,7 @@ export default function Accommodations() {
   const postData = async (newAcommodation) => {
     try {
       const response = await createAccommodation(newAcommodation);
-      console.log('pintar en el principal', response);
+      console.log(response);
       Swal.fire({
         title: "¡Alojamiento agregado!",
         text: "El nuevo alojamiento se ha agregado exitosamente.",
@@ -109,25 +108,26 @@ export default function Accommodations() {
 
   return (
  <>
-  <div className=" d-flex justify-content-between align-items-center mb-4">
-    <h2 className="">Accommodations</h2>
+
+  <div className="w-100 d-flex flex-column flex-md-row justify-content-center align-items-center">
+  {isLoading ? (
+    <div className="d-flex justify-content-center align-items-center" style={{ height: '60vh' }}>
+   <div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
+</div>
+  </div>
+    ) : isAuthenticated ? (
+      <div>
+    <div className=" d-flex  justify-content-between align-items-center gap-1 mb-4 flex-custom-media">
+    <h2 className="d-flex align-items-start col col-lg-9 col-md-8 col-sm-6 width-media">Accommodations</h2>
     <button
-      className="d-flex align-items-center gap-2 px-3 rounded-2"
+      className="d-flex col col-lg-3 justify-content-center col-md-4 col-sm-6  align-items- gap-2 px-3 rounded-2 width-media"
       onClick={() => setModalOpen(true)}
     >
       <PlusLg size={16} />
       Nuevo Alojamiento
     </button>
   </div>
-  <div className="w-100 d-flex justify-content-between align-items-center">
-  {isLoading ? (
-    <div className=" d-flex justify-content-center align-items-center" style={{width:'1140px', height: '60vh' }}>
-   <div className="spinner-border" role="status">
-  <span className="visually-hidden">Loading...</span>
-</div>
-  </div>
-    ) : isAuthenticated ? (
-      <div className="col-12">
         {accommodations.map((item) => (
           <div key={item.id} className="mb-4">
             <CustomCard
